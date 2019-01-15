@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LearningMVC_API.Models.ApplicationUser>
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Manage Users";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+
+<table class="table table-condensed table-striped table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>Action</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+
+                    @{
+
+                        bool x = await UserManager.IsInRoleAsync(item, "Admin");
+
+                        if (x == true)
+                        {
+                            <a asp-action="RemoveAdminRights" asp-route-id="@item.Id" class="btn btn-primary">Remove Administrative Rights</a>
+                        }
+                        else
+                        {
+                            <a asp-action="GiveAdminRights" asp-route-id="@item.Id" class="btn btn-success">Give Administrative Rights</a>
+
+                        }
+                    }
+
+
+
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

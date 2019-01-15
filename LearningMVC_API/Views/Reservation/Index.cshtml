@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LearningMVC_API.Data.ClassModel>
+
+@{
+    ViewData["Title"] = "Reservations";
+
+}
+<h2>@ViewData["Title"]</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndTime)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+
+                    <form method="post">
+                        <button asp-action="DeleteReservation" asp-route-id="@item.Id" class="btn btn-danger">Delete</button>
+                    </form>
+
+
+
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+
