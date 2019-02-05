@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using LearningMVC_API.Data;
 using LearningMVC_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace LearningMVC_API.Controllers
 {
+    [Authorize(Roles ="Executive")]
     public class ManageUsersController : Controller
     {
 

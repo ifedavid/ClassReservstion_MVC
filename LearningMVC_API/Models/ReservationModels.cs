@@ -12,6 +12,7 @@ namespace LearningMVC_API.Models
         public int Id { get; set; }
         public ApplicationUser User { get; set; }
         public ClassModel Class { get; set; }
+       
         
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace LearningMVC_API.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190117220546_IsDelete")]
+    partial class IsDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,8 +29,6 @@ namespace LearningMVC_API.Data.Migrations
                     b.Property<int>("Capacity");
 
                     b.Property<DateTime>("EndTime");
-
-                    b.Property<bool>("IsDelete");
 
                     b.Property<DateTime>("StartTime");
 
@@ -97,6 +96,8 @@ namespace LearningMVC_API.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ClassId");
+
+                    b.Property<bool>("IsDelete");
 
                     b.Property<string>("UserId");
 

@@ -47,9 +47,8 @@ namespace LearningMVC_API.Controllers
 
         public async Task<IActionResult> ClassCatalogue()
         {
-            return View(await _context.classModel.ToListAsync());
+            return View(await _context.classModel.Where(m=>m.IsDelete==false).ToListAsync());
         }
-
 
         [Authorize]
         public async Task<IActionResult> ReserveClass(int? Id)
@@ -79,12 +78,12 @@ namespace LearningMVC_API.Controllers
                 ViewData["Message"] = "Class Is Already at full capacity";
                 return View(ClassModels);
             }
-            else if (ChosenClass.EndTime >= DateTime.Today)
+            else if (ChosenClass.EndTime.Date <= DateTime.Today.Date)
             {
                 ViewData["Message"] = "Class is expired";
                 return View(ClassModels);
             }
-            else if (currentClass.Count() >= 1)
+            else if (currentClass.Count() == 1)
             {
 
                 ViewData["Message"] = "You Already reserved this class";

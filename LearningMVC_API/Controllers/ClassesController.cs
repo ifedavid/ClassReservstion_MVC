@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LearningMVC_API.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LearningMVC_API
 {
+    [Authorize]
     public class ClassesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,7 +24,7 @@ namespace LearningMVC_API
         // GET: ClassModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.classModel.ToListAsync());
+            return View(await _context.classModel.Where(m => m.IsDelete == false).ToListAsync());
         }
 
         // GET: ClassModels/Details/5
@@ -140,7 +142,7 @@ namespace LearningMVC_API
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var classModel = await _context.classModel.SingleOrDefaultAsync(m => m.Id == id);
-            _context.classModel.Remove(classModel);
+            classModel.IsDelete = true;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

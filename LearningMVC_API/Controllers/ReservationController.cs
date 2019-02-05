@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace LearningMVC_API.Controllers
 {
+    [Authorize]
     public class ReservationController : Controller
     {
         public string Message { get; set; }

@@ -32,7 +32,7 @@ namespace LearningMVC_API
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-
+            services.AddMemoryCache();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -91,7 +91,7 @@ namespace LearningMVC_API
             var RoleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = service.GetRequiredService<UserManager<ApplicationUser>>();
             IdentityResult roleResult;
-            string[] roleNames = { "User", "Admin" };
+            string[] roleNames = { "Executive", "Admin" };
             foreach (var Rolename in roleNames)
             {
                 bool roleCheck = await RoleManager.RoleExistsAsync(Rolename);
@@ -105,6 +105,9 @@ namespace LearningMVC_API
             ApplicationUser user1 = await UserManager.FindByEmailAsync("ifeoluwa@gmail.com");
            
             await UserManager.AddToRoleAsync(user1, "Admin");
+
+            ApplicationUser user2 = await UserManager.FindByEmailAsync("i@m.com");
+            await UserManager.AddToRoleAsync(user2, "Executive");
 
 
 
